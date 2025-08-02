@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Personal Dashboard</title>
+    <!-- Link to our custom stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Google API client library (loads auth and calendar APIs) -->
+    <script src="https://apis.google.com/js/api.js" async defer></script>
+    <!-- Our application logic for notes, weather and calendar -->
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <h1>Personal Dashboard</h1>
+    <div class="container">
+      <!-- Notes Section -->
+      <section id="notes-section">
+        <h2>My Notes</h2>
+        <textarea
+          id="note-input"
+          placeholder="Enter a note..."
+          rows="4"
+        ></textarea>
+        <button id="save-note">Save Note</button>
+        <ul id="notes-list"></ul>
+      </section>
+
+      <!-- Calendar Section -->
+      <section id="calendar-section">
+        <h2>Google Calendar</h2>
+        <p class="info">
+          Sign in with your Google account to view upcoming events from your
+          private calendar. The application uses Google's OAuth flow, so your
+          login credentials stay within Google's authentication system.
+        </p>
+        <div class="auth-buttons">
+          <button id="authorize_button">Authorize</button>
+          <button id="signout_button" style="display: none">Sign Out</button>
+        </div>
+        <ul id="events" class="events-list"></ul>
+      </section>
+
+      <!-- Weather Section -->
+      <section id="weather-section">
+        <h2>Weather</h2>
+        <div class="weather-container">
+          <div id="aarhus-weather" class="weather-box">
+            <h3>Aarhus, Denmark</h3>
+            <p id="aarhus-temp">Loading temperature...</p>
+            <p id="aarhus-desc"></p>
+          </div>
+          <div id="newton-weather" class="weather-box">
+            <h3>Newton, New Jersey</h3>
+            <p id="newton-temp">Loading temperature...</p>
+            <p id="newton-desc"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Once the page loads, call the initGoogle function (defined in script.js)
+         to initialize the Google API client. This ensures the OAuth flow is
+         prepared once gapi has finished loading. -->
+    <script>
+      window.addEventListener('load', function () {
+        if (window.initGoogle) {
+          window.initGoogle();
+        }
+      });
+    </script>
+  </body>
+</html>
